@@ -174,10 +174,12 @@ final class ListingCore
             : ['dependencies' => [], 'version' => '1.0.0'];
 
         // Favorites store is enqueued by the independent FavoritesCore module
+        // Listing module dependencies START: include script modules imported by listing-store.
         $listingDeps = ['@wordpress/interactivity'];
         if (is_user_logged_in()) {
             $listingDeps[] = '@starwishx/favorites';
         }
+        // Listing module dependencies END.
 
         if (function_exists('wp_register_script_module')) {
             wp_register_script_module(

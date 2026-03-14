@@ -105,10 +105,16 @@ if (function_exists('render_block')) {
                     <?php the_title(); ?>
                 </h1>
                 <div class="project-social">
-                    <div class="project-social__share">
-                        <span><?php esc_html_e('Social share', 'starwishx') ?></span>
-                        <?php sw_svg_e('icon-share', 18, 20, 'icon-share'); ?>
-                    </div>
+                    <?php
+                    // Social Share Integration START: shared template part for review.
+                    get_template_part('components/social-share/social-share', null, [
+                        'post_id' => get_the_ID(),
+                        'label' => __('Social share', 'starwishx'),
+                        'wrapper_class' => 'project-social__share',
+                        'trigger_class' => 'project-social__share-trigger',
+                    ]);
+                    // Social Share Integration END.
+                    ?>
                 </div>
             </header>
 

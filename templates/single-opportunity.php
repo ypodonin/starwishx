@@ -170,12 +170,16 @@ if (function_exists('render_block')) {
                     </dl>
 
                     <div class="opportunity-social">
-                        <div class="opportunity-social__share">
-                            <span><?php esc_html_e('Social share', 'starwishx') ?></span>
-                            <svg width="18" height="20" class="icon-share">
-                                <use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/img/sprites.svg#icon-share"></use>
-                            </svg>
-                        </div>
+                        <?php
+                        // Social Share Integration START: shared template part for review.
+                        get_template_part('components/social-share/social-share', null, [
+                            'post_id' => $post_id,
+                            'label' => __('Social share', 'starwishx'),
+                            'wrapper_class' => 'opportunity-social__share',
+                            'trigger_class' => 'opportunity-social__share-trigger',
+                        ]);
+                        // Social Share Integration END.
+                        ?>
                         <div class="opportunity-badges">
                             <?php if (get_post_status() === 'publish') {
                                 get_template_part('template-parts/control-favorites', null, ['post_id' => $post_id]);
