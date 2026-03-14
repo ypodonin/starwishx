@@ -38,7 +38,7 @@ class RegisterForm extends AbstractForm
         $jsId = $this->getJsId();
         $this->startBuffer();
 ?>
-        <form class="gateway-form" data-wp-on--submit="actions.<?php echo $jsId; ?>.submit">
+        <form class="gateway-form" method="post" data-wp-on--submit="actions.<?php echo $jsId; ?>.submit">
             <h2 class="gateway-form__title"><?php esc_html_e('Create Account', 'starwishx'); ?></h2>
 
             <div class="gateway-fields__container" data-wp-bind--hidden="state.forms.<?php echo $jsId; ?>.success">

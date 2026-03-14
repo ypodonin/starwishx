@@ -44,6 +44,7 @@ class LoginForm extends AbstractForm
 ?>
         <form
             class="gateway-form gateway-form--login"
+            method="post"
             data-wp-on--submit="actions.<?php echo esc_attr($this->getJsId()); ?>.submit"
             autocomplete="on">
 

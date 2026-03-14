@@ -37,6 +37,7 @@ class ResetPasswordForm extends AbstractForm
         $this->startBuffer();
 ?>
         <form class="gateway-form gateway-form--reset-password"
+            method="post"
             data-wp-on--submit="actions.<?php echo esc_attr($this->getJsId()); ?>.submit">
             <h2 class="gateway-form__title"><?php esc_html_e('Set New Password', 'starwishx'); ?></h2>
             <p class="gateway-form__intro">

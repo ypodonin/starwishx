@@ -192,6 +192,27 @@ This file tracks work completed for the standalone `social-share` component so t
   - about panel is visible
   - opportunities and NGO tab data are present
 
+### Gateway Runtime Recovery
+- Additional regression confirmed on `http://localhost:8080/gateway/` while reviewing the pushed share branch state:
+  - login button rendered both idle and submitting labels at once
+  - password visibility toggle UI was not hydrating correctly
+  - browser could fall back to submitting credentials in the URL if runtime JS failed
+- Root cause:
+  - ignored compiled module bundle `assets/js/gateway-store.module.js` was missing locally, so the WordPress Interactivity store never hydrated
+- Recovery actions:
+  - rebuilt module bundles with:
+    - `npx -y node@20 node_modules/gulp/bin/gulp.js moduleScripts --prod`
+  - verified `assets/js/gateway-store.module.js` now returns `200`
+  - added `method="post"` fallback to gateway forms:
+    - `inc/gateway/Forms/LoginForm.php`
+    - `inc/gateway/Forms/RegisterForm.php`
+    - `inc/gateway/Forms/LostPasswordForm.php`
+    - `inc/gateway/Forms/ResetPasswordForm.php`
+- Result:
+  - gateway runtime hydration restored
+  - password visibility toggle wiring is active again
+  - submit fallback is safer if client-side JS fails
+
 ## Update Rule
 - Any future change to this component should append a dated entry here with:
   - what changed
